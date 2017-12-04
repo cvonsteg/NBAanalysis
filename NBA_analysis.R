@@ -1,18 +1,18 @@
 library('readr')
-require('dplyr')
-require('tidyr')
-require('tibble')
+library('dplyr')
+library('tidyr')
+library('tibble')
 library('ggplot2')
 
 
 #### Load and Combine Raw Data
-October <- read_csv('C:/Users/Tino/Desktop/Data Files/NBA_1016.csv')
-November <- read_csv('C:/Users/Tino/Desktop/Data Files/NBA_1116.csv')
-December <- read_csv('C:/Users/Tino/Desktop/Data Files/NBA_1216.csv')
-January <- read_csv('C:/Users/Tino/Desktop/Data Files/NBA_0117.csv')
-February <- read_csv('C:/Users/Tino/Desktop/Data Files/NBA_0217.csv')
-March <- read_csv('C:/Users/Tino/Desktop/Data Files/NBA_0317.csv')
-April <- read_csv('C:/Users/Tino/Desktop/Data Files/NBA_0417.csv')
+October <- read_csv('C:/Users/Tino/Desktop/gitProjects/NBA/NBA_1016.csv')
+November <- read_csv('C:/Users/Tino/Desktop/gitProjects/NBA/NBA_1116.csv')
+December <- read_csv('C:/Users/Tino/Desktop/gitProjects/NBA/NBA_1216.csv')
+January <- read_csv('C:/Users/Tino/Desktop/gitProjects/NBA/NBA_0117.csv')
+February <- read_csv('C:/Users/Tino/Desktop/gitProjects/NBA/NBA_0217.csv')
+March <- read_csv('C:/Users/Tino/Desktop/gitProjects/NBA/NBA_0317.csv')
+April <- read_csv('C:/Users/Tino/Desktop/gitProjects/NBA/NBA_0417.csv')
 
 #Combine
 regularSeason <- rbind(October, November, December, January, February, March, April)
