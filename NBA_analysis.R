@@ -84,11 +84,12 @@ ggplot(teams) + geom_density(aes(pts), colour = 'midnightblue', fill = 'midnight
 
 timeAnalysis <- teams %>%
         group_by(team, weekday) %>%
-        summarise(weekdayWins = sum(win)) %>%
+        summarise(weekdayGames = n(),
+                weekdayWins = sum(win)) %>%
         ungroup() %>%
         group_by(team) %>%
         mutate(totalWins = sum(weekdayWins),
-               dayWinPerc = (weekdayWins/totalWins)*100)
+               dayWinPerc = (weekdayWins/weekdayGames)*100)
 
 # Monday Blues?
 ggplot(teams, aes(x = weekday, y = win, fill = weekday, alpha = 0.1)) + 
@@ -98,6 +99,13 @@ ggplot(teams, aes(x = weekday, y = win, fill = weekday, alpha = 0.1)) +
         labs(title = "Wins by Weekday")+
         theme_classic()
 
+# comparing team win percentages by day to visually identify best/worst matchups #
+ggplot(timeAnalysis, aes(x = team, y = dayWinPerc, fill = dayWinPerc)) + 
+        geom_bar(stat = 'identity') +
+        scale_fill_continuous() +
+        coord_flip() + 
+        facet_grid(.~weekday) + 
+        theme_classic()
 
 ggplot(timeAnalysis, aes(x = weekday, y = dayWinPerc, fill = weekday)) + 
         geom_bar(stat = 'identity') + 
@@ -171,6 +179,10 @@ basicWinsSummary <- regularSeason %>%
                   avg_margin = mean(margin), 
                   avg_home = mean(pts_home), 
                   avg_away = mean(pts_visitor))
+
+# Home team advantage appears to be very much real, and also more prominent as evidenced #
+# by the bigger win margin for home teams #
+#Conduct statistical test! #
 
 
 daySummary <- regularSeason %>%
